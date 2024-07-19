@@ -15,7 +15,7 @@
     const sseData = document.getElementById('sse-data');
 
     function startSSE() {
-        eventSource = new EventSource('/stream/');
+        eventSource = new EventSource('/stream1/');
         eventSource.onmessage = event => sseData.innerHTML += event.data + '<br>';
         document.querySelector('button[onclick="startSSE()"]').disabled = true;
         document.querySelector('button[onclick="stopSSE()"]').disabled = false;

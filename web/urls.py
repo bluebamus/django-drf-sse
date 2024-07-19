@@ -16,8 +16,16 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import IndexView
+from .views import (
+    index,
+    index_update_state,
+    sse_stream,
+    sse_stream_update_state,
+)
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="index"),
+    path("", index, name="index"),
+    path("1/", index_update_state, name="index_update_state"),
+    path("stream/", sse_stream, name="sse_stream"),
+    path("stream1/", sse_stream_update_state, name="sse_stream_update_state"),
 ]
