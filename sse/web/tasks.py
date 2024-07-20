@@ -12,19 +12,16 @@ def add(x, y):
 @shared_task(bind=True)
 def multitasking_update_state(self, x, y):
     result = x + y
-    self.update_state(state="IN_PROGRESS", meta={"result": result})
+    for i in range(1, 6):
+        intermediate_result = result * (2 * i)
+        print(f"intermediate_result : {i} : {intermediate_result}")
+        self.update_state(
+            state="IN_PROGRESS", meta={"current": i, "result": intermediate_result}
+        )
+        time.sleep(1)  # 작업 진행을 위한 대기 시간 (예시)
+
+    self.update_state(state="SUCCESS")
     return {"status": "Task completed!"}
-
-    # for i in range(1, 6):
-    #     intermediate_result = result * (2 * i)
-    #     print(f"intermediate_result : {i} : {intermediate_result}")
-    #     self.update_state(
-    #         state=f"IN_PROGRESS {i}", meta={"current": i, "result": intermediate_result}
-    #     )
-    #     time.sleep(1)  # 작업 진행을 위한 대기 시간 (예시)
-
-    # self.update_state(state="SUCCESS")
-    # return {"status": "Task completed!"}
 
 
 # daphne -b 0.0.0.0 -p 8000 config.asgi:application

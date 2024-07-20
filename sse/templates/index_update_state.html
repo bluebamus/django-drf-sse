@@ -23,10 +23,10 @@
 
     function stopSSE() {
         if (eventSource) {
-eventSource.close();
+            eventSource.close();
         }
-        document.querySelector('button[onclick="startSSE()"]').disabled = false;
-        document.querySelector('button[onclick="stopSSE()"]').disabled = true;
+            document.querySelector('button[onclick="startSSE()"]').disabled = false;
+            document.querySelector('button[onclick="stopSSE()"]').disabled = true;
     }
 </script>
 </body>
